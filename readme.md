@@ -110,6 +110,32 @@ this.setState( { randomSet: randomArr })
 
 <img src="src/assets/quiz.png" width="600">
 
+
+
+## Wins
+
+For each question in a round we needed five things from Deezer, one snippet of music and the names of four different artists, one of whom was responsible for the snippet played. From the Json object shown, that is the value of the "artist" and "preview" keys.
+
+This sounded simple enough as these things could all be randomly generated from the array, the unanticipated complication though was in randomly generating three incorrect answers in a random way but without duplicates. I ended up filtering the array to remove the correct answer and then segmenting the filtered array into three segments and randomly generating the incorrect answers from different segments, thus avoiding the risk of duplicating answers.
+
+```js
+this.filteredTracks = this.state.tracks.filter(track =>
+  track.artist.name !== this.trackName)
+
+this.playingSong = this.state.tracks[questionCounter].preview
+
+randomArr[0] = this.filteredTracks[Math.floor(Math.random() * 10 )].artist.name
+randomArr[1] = this.filteredTracks[Math.floor(Math.random() * 10) + 11].artist.name
+randomArr[2] = this.filteredTracks[Math.floor(Math.random() * 5) + 19].artist.name
+
+this.setState( { randomSet: randomArr })
+```
+
+<img src="src/assets/quiz.png" width="600">
+
+
+I was pleased with my solutions to the "randomness" issues we encountered: 
+
 The second "randomness" issue I encountered was in ensuring that the correct answer was in a different position for each quiz question. I achieved this by placing the answers in CSS "grid-areas" and then randomly generating the area for the correct answer, the other answers would then be placed in the other three areas automatically.
 
 
@@ -134,6 +160,15 @@ And its implementation in the JSX:
 
 ## Challenges and Future Improvements
 
-This was out first group project and with the time frame being only two days a lot of the difficulties we encountered came about as a result of struggling to integrate components that we had worked on independently. We divided the project so that I focussed on the quiz itself, while my team mates worked on the home page and the styling respectively. We found the last minute amalgamation of these different parts quite challenging. An important lesson about the value of integrating as you work (via gitHub) was learned though this project was undertaken at a time before we were comfortable with this platform.
+This was out first group project and with the time frame being only two days a lot of the difficulties we encountered came about as a result of struggling to integrate components that we had worked on independently. We divided the project so that I focussed on the quiz itself, while my team mates worked on the home page and the styling respectively. We found the last minute amalgamation of these different parts quite challenging. 
 
 The quiz itself could be developed further by introducing user authentication, allowing people to log in and then tracking scores and including a leaderboard. We could also expand the type and breadth of questions offered as the Deezer API is a rich source of data. So rich in fact that I was eager to use it again and came back to it in my next project which can be seen here.
+
+
+## Key Learnings
+
+The most valuable lessons learned during the course of this project were definitely to do with team work and best practices when working closely with others on one small project. An important lesson about the value of integrating as you work (via gitHub) was learned (though this project was undertaken at a time before we were comfortable with this platform).
+
+I also feel like I gained valuable experience of working with public APIs. Not only in that I am able to easily make AJAX requests and feel completely at ease with the process of getting and querying data but also in regards to the reading of the official documentation. I now feel comfortable delving into this and have a good idea of how to go about interpreting the instructions and language used. 
+
+
